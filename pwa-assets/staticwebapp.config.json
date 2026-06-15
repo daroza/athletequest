@@ -1,0 +1,4 @@
+{
+  "mimeTypes": { ".webmanifest": "application/manifest+json", ".json": "application/json" },
+  "globalHeaders": { "Service-Worker-Allowed": "/" }
+}

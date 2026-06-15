@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AthleteQuest AI — User Guide</title>
+<style>
+  :root{
+    --indigo:#4338CA; --purple:#7C3AED; --pink:#DB2777;
+    --ink:#241b56; --muted:#5b5478; --line:#E0E7FF; --bg:#F5F3FF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1200px 500px at 50% -10%, #EDE9FE 0%, transparent 60%),
+      linear-gradient(180deg,#F5F3FF 0%, #FDF2F8 100%);
+    line-height:1.55; -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 18px 64px;}
+  header.hero{
+    text-align:center; padding:38px 18px 26px;
+    background:linear-gradient(120deg,var(--indigo),var(--purple) 55%,var(--pink));
+    color:#fff; border-radius:0 0 28px 28px; box-shadow:0 10px 30px rgba(67,56,202,.25);
+  }
+  header.hero .logo{font-size:2.6rem;}
+  header.hero h1{margin:6px 0 4px; font-size:1.9rem; letter-spacing:-.02em;}
+  header.hero p{margin:4px 0; opacity:.95; font-size:.98rem;}
+  header.hero a.live{color:#fff; font-weight:700; text-decoration:underline; word-break:break-all;}
+  .backbar{max-width:760px; margin:14px auto 0; padding:0 18px;}
+  .backbtn{
+    display:inline-flex; align-items:center; gap:6px; text-decoration:none;
+    background:#fff; color:var(--indigo); font-weight:700; font-size:.9rem;
+    padding:9px 14px; border-radius:999px; box-shadow:0 3px 0 #C7D2FE;
+  }
+  .toc{
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:16px 18px; margin:18px 0 8px; box-shadow:0 6px 18px rgba(67,56,202,.06);
+  }
+  .toc h2{margin:0 0 8px; font-size:1rem; color:var(--purple); text-transform:uppercase; letter-spacing:.05em;}
+  .toc ol{margin:0; padding-left:20px; columns:2; column-gap:24px;}
+  .toc a{color:var(--ink); text-decoration:none; font-weight:600;}
+  .toc a:hover{color:var(--pink); text-decoration:underline;}
+  section.card{
+    background:#fff; border:1px solid var(--line); border-radius:20px;
+    padding:20px 22px; margin:18px 0; box-shadow:0 8px 22px rgba(67,56,202,.07);
+  }
+  section.card h2{
+    margin:0 0 6px; font-size:1.35rem; letter-spacing:-.01em;
+    background:linear-gradient(90deg,var(--indigo),var(--purple),var(--pink));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  h3{margin:18px 0 4px; font-size:1.05rem; color:var(--indigo);}
+  p{margin:8px 0;}
+  ul{margin:8px 0; padding-left:22px;}
+  li{margin:5px 0;}
+  .muted{color:var(--muted); font-size:.94rem;}
+  .pill{
+    display:inline-block; background:#EEF2FF; color:var(--indigo);
+    font-size:.72rem; font-weight:800; padding:2px 8px; border-radius:999px;
+    vertical-align:middle; margin-left:6px;
+  }
+  .callout{
+    background:#FFF7ED; border:1px solid #FED7AA; border-radius:12px;
+    padding:12px 14px; margin:12px 0; font-size:.93rem;
+  }
+  .safe{background:#F0FDF4; border-color:#BBF7D0;}
+  .privacy{background:#EEF2FF; border-color:#C7D2FE;}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:.92rem;}
+  th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--purple); font-size:.82rem; text-transform:uppercase; letter-spacing:.04em;}
+  td b{color:var(--ink);}
+  .steps{counter-reset:s; list-style:none; padding-left:0;}
+  .steps li{position:relative; padding-left:38px; margin:10px 0;}
+  .steps li:before{
+    counter-increment:s; content:counter(s);
+    position:absolute; left:0; top:0; width:26px; height:26px;
+    background:linear-gradient(180deg,var(--indigo),var(--purple)); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.82rem;
+  }
+  footer{text-align:center; color:var(--muted); font-size:.88rem; margin-top:26px;}
+  a{color:var(--pink);}
+  @media (max-width:560px){ .toc ol{columns:1;} header.hero h1{font-size:1.55rem;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="logo">🏅</div>
+  <h1>AthleteQuest AI — User Guide</h1>
+  <p>Your virtual sports coach for young athletes (ages 5–18)</p>
+  <p class="muted" style="color:rgba(255,255,255,.92);">Live app: <a class="live" href="https://delightful-pond-0409a311e.7.azurestaticapps.net">delightful-pond-0409a311e.7.azurestaticapps.net</a></p>
+</header>
+
+<div class="backbar"><a class="backbtn" href="AthleteQuest.html">← Back to the app</a></div>
+
+<div class="wrap">
+
+  <p style="margin-top:18px;">AthleteQuest AI combines a personal AI coach, performance tracking with forecasting, age-group benchmark bands, and a game layer (XP, levels, coins, badges, quests) to help kids stay motivated and reach their sports goals. Everything runs in the browser and <b>all data stays on the device</b> — no account, no sign-up, nothing sent to a server. It even works offline (airplane mode).</p>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#start">Getting Started</a></li>
+      <li><a href="#athletes">Multiple Athletes</a></li>
+      <li><a href="#tabs">The Five Tabs</a></li>
+      <li><a href="#share">Share Your Wins</a></li>
+      <li><a href="#voice">Voice Settings</a></li>
+      <li><a href="#parent">Parent Dashboard</a></li>
+      <li><a href="#game">The Game Layer</a></li>
+      <li><a href="#privacy">Data &amp; Privacy</a></li>
+      <li><a href="#tips">Tips &amp; Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <section class="card" id="start">
+    <h2>1. Getting Started</h2>
+    <h3>Try the demo first</h3>
+    <p>On the welcome screen, tap <b>👀 Try demo athlete (Dean, swimmer)</b> to explore a fully loaded profile — a 12-year-old swimmer chasing a 59.5 qualifying time in 100m Freestyle, complete with results, forecasts, and quests.</p>
+
+    <h3>Create your own athlete</h3>
+    <p>Tap <b>Start my adventure! ✨</b> and walk through the 7-step setup:</p>
+    <ol class="steps">
+      <li><b>Name &amp; age</b> — what the coach calls you.</li>
+      <li><b>Sport</b> — swimming, track, running/XC, soccer, basketball, baseball/softball, tennis, gymnastics, volleyball, hockey, or "My Sport" for anything else.</li>
+      <li><b>About me</b> — height/weight (optional), position or main event, your level (Rookie → Elite), <b>how many years you've played</b>, and a quick <b>injury check</b>. If something hurts, the app asks you to talk with a parent and your <b>family physician</b> first — and leaves a note on the Parent dashboard.</li>
+      <li><b>Big goal</b> — pick goal chips (get faster, make the team…). Optional turbo-mode: enter a target time/score and a date, and the app forecasts your chances.</li>
+      <li><b>Avatar</b> — build your athlete: skin, hair, jersey color, and number.</li>
+      <li><b>AI coach</b> — pick a style (🤖 🐬 🦅 🦁 🧙 ⭐), name your coach, and choose a personality: 🔥 Hype, 😎 Chill, 🦉 Wise, or 🤪 Goofy.</li>
+      <li>The app builds your <b>Athlete Twin</b> and you're in!</li>
+    </ol>
+
+    <h3>Install it like an app</h3>
+    <p>In your phone browser's menu, choose <b>"Add to Home screen."</b> AthleteQuest then opens full-screen like a native app and runs offline.</p>
+
+    <h3>Need help?</h3>
+    <p>Tap the <b>❓ Guide</b> button in the top header any time to open this user guide. Grown-ups can also reach it from the Parent Dashboard.</p>
+  </section>
+
+  <section class="card" id="athletes">
+    <h2>2. Multiple Athletes 👥</h2>
+    <p>One device can hold a whole family of athletes — siblings, or one kid in two sports.</p>
+    <ul>
+      <li>Tap your <b>avatar in the top-left of the header</b> (or <b>👥 Switch / add athlete</b> in the Parent Dashboard) to open <b>Athletes on this device</b>.</li>
+      <li><b>Switch</b> to any athlete with ↪️ — the right data, coach, and progress load instantly.</li>
+      <li><b>🆕 Add an athlete</b> runs setup for a new profile <i>without</i> erasing anyone — the current athlete is kept safe.</li>
+      <li><b>🗑 Delete</b> removes a single athlete; the others stay. (Tip: save a backup first.)</li>
+    </ul>
+    <p class="muted">Each athlete's data is stored separately. Use the backup tools (section 6) to move an athlete to another phone.</p>
+  </section>
+
+  <section class="card" id="tabs">
+    <h2>3. The Five Tabs</h2>
+
+    <h3>🏠 Home</h3>
+    <p>Your daily dashboard: a tip from your coach, your avatar, the <b>Athlete Twin</b> summary (consistency score, weekly training minutes, performance trend), today's quests, quick-log buttons (Log Practice, Add Result, 💓 Heart Check, Log Sleep), the <b>Skill Radar</b>, your skill tree, and badge collection.</p>
+    <p><b>💓 Heart Check:</b> a kid-friendly pulse tool. It teaches how to find a pulse (two fingers on the wrist or neck — never the thumb), runs a 15-second counter, and converts beats to BPM. Do it <b>before</b> practice (rested) and <b>again after</b> — the difference shows how hard the heart worked, and a falling before-practice number over weeks is fitness you can see.</p>
+    <div class="callout safe"><b>Safety check:</b> every practice log asks "any pain or injuries today?" Picking 🤕 stops the log, explains Rule #1 (never hurt yourself — proper technique first), advises telling a parent and consulting the <b>family physician</b> before training again, and flags it for parents.</div>
+    <p><b>Workout reward:</b> finishing a practice log plays a cute animation of your own avatar doing your sport — swimming through waves, dribbling, cartwheeling, and more.</p>
+    <p><b>Skill Radar:</b> a spider chart comparing your six skill levels (Speed, Strength, Endurance, Technique, Recovery, Mental) against the ideal profile for your sport. Your two biggest gaps are called out with a drill to close each one.</p>
+
+    <h3>🎯 Quests</h3>
+    <ul>
+      <li><b>Daily quests</b> (reset at midnight): 3 per day — log a practice, drink water, stretch, ask the coach a question. Some complete automatically.</li>
+      <li><b>Weekly challenges:</b> complete 3 practices and 6 daily quests per week for bonus rewards.</li>
+      <li><b>Special Mission:</b> a 3-step road to your big goal — log 2 results, complete 6 practices, set a new personal best. Finishing earns 150 XP, 60 coins, and the 🏆 Goal Crusher badge.</li>
+    </ul>
+
+    <h3>💬 Coach</h3>
+    <p>Chat with your AI coach. It knows your real data — results, training load, sleep, goal progress — and replies in your chosen personality. It covers a wide range of questions:</p>
+    <ul>
+      <li><b>Training:</b> "What should I do today?" → a plan based on your recent energy; "How do I get faster?" → power moves from your trend.</li>
+      <li><b>Goals &amp; forecasts:</b> "How close am I to my goal?" / "Predict my future time" → forecast with a probability estimate.</li>
+      <li><b>Why am I slowing down?</b> → checks your sleep, training volume, and how practices felt.</li>
+      <li><b>Body &amp; habits:</b> nutrition, hydration, sleep &amp; recovery, warm-up/cool-down, getting stronger, and "How do I check my heartbeat?"</li>
+      <li><b>Mind &amp; emotions:</b> game-day nerves, building confidence, bouncing back from a loss, celebrating a win, focus, breathing to calm down, and teammate/coach situations.</li>
+      <li><b>Gear:</b> "What do I need?" → your sport's equipment list with price ranges.</li>
+      <li><b>Hard stuff:</b> if a kid mentions being bullied, the coach gently urges them to tell a trusted adult.</li>
+    </ul>
+    <p><b>Talk instead of typing:</b> tap the 🎤 button. The first use downloads a small speech model (~40MB, one time); after that the mic works on-device. Tap 🎤 to start, ⏹ to stop.</p>
+    <p><b>Coach voice:</b> tap 🔊 in the coach header to turn spoken replies on/off. The voice defaults to a male voice — see section 5 to change it.</p>
+    <div class="callout safe"><b>Safety guardrails:</b> the coach always redirects injury or pain questions to parents, coaches, and doctors; it never gives dieting, supplement, or overtraining advice to kids; and anything it can't help with is handed back to a grown-up.</div>
+
+    <h3>📈 Stats</h3>
+    <ul>
+      <li><b>Add results</b> (race times, meet scores, skill tests). Times accept <code>65.2</code> or <code>1:05.2</code> formats. You can also <b>bulk-import</b> several results at once.</li>
+      <li>After <b>3 results</b> in one event, the <b>forecast engine</b> turns on: a chart with your trend line, predictions for 1 and 2 months out, a confidence rating (⭐–⭐⭐⭐), and — if you set a target — your estimated <b>goal chance %</b> and a 🎯 goal line.</li>
+      <li><b>Benchmark bands 📊 <span class="pill">new</span></b> — for supported timed events the forecast also shows your level (<b>Developing → Competitive → Advanced</b>) and how far you are from the next band (e.g. "1.2s from Competitive"). Covered: swimming (50m &amp; 100m Freestyle), track (100m Sprint, 1600m), and running (1 Mile).</li>
+      <li>Personal bests trigger a 🚀 PR celebration (with a 📸 share card — section 4) and are tracked per event.</li>
+    </ul>
+    <div class="callout">Benchmark bands are an <b>approximate all-around guide (~ages 11–13), not official standards</b>. Your coach or parent can always set a custom target instead. The forecast uses linear regression over your logged results — the more you log, the smarter it gets.</div>
+
+    <h3>🎒 Locker</h3>
+    <p>Spend coins earned from quests:</p>
+    <ul>
+      <li><b>👕 Jerseys</b> — colors plus special gradients (Ocean Wave, Galaxy, Champion Gold)</li>
+      <li><b>👟 Shoes</b>, <b>🎩 Extras</b> (shades, goggles, medal, cape, crown), <b>✨ Effects</b> (sparkles, fire feet, lightning, rainbow)</li>
+      <li><b>🛒 Gear</b> — a <i>real-world</i> gear guide for your sport: what you actually need, rough US price ranges, and fit tips. Tailored to how long you've played, with a reminder to always shop with a parent.</li>
+      <li><b>🤖 Coach tab</b> — rebuild your coach: name, personality, skin, hair, outfit, headwear, gear (whistle, clipboard, megaphone…), and voice.</li>
+    </ul>
+  </section>
+
+  <section class="card" id="share">
+    <h2>4. Share Your Wins 📸</h2>
+    <p>When you set a <b>personal best</b> or <b>level up</b>, the celebration screen has a <b>📸 Share this win</b> button. It builds a polished image card — your avatar, the headline stat, and the date — and sends it through your phone's share sheet (to a parent or coach), or saves it to your photos.</p>
+    <div class="callout privacy">For privacy, cards only ever show your <b>first name and the stat</b> — no last name, no location.</div>
+  </section>
+
+  <section class="card" id="voice">
+    <h2>5. Voice Settings</h2>
+    <p><b>Coach speaks:</b> Locker → 🤖 Coach tab → <b>Voice</b>.</p>
+    <ul>
+      <li><b>Auto (male)</b> is the default — the app picks the best male English voice on your device.</li>
+      <li>Or choose any voice from the dropdown; tap <b>▶️ Test</b> to hear a sample. The choice is saved.</li>
+      <li>Voices come from your phone/computer, so the list differs by device. On Android you can add voices in Settings → Text-to-speech.</li>
+    </ul>
+    <p><b>You speak:</b> the 🎤 mic button on the Coach chat bar (needs microphone permission; first use downloads the speech model).</p>
+  </section>
+
+  <section class="card" id="parent">
+    <h2>6. Parent Dashboard 👪</h2>
+    <p>Tap the <b>👪</b> button in the header. A quick multiplication question keeps kids out. Inside you'll find:</p>
+    <ul>
+      <li><b>Athlete summary</b> — level, streak, quests, years of experience, and average pre/post-practice heart rate</li>
+      <li><b>🩺 Health note</b> — appears if your child reported an injury, with a reminder to consult your family physician; clear it once resolved</li>
+      <li><b>📅 Consistency calendar</b> — which of the last 28 days had training</li>
+      <li><b>📊 Weekly training volume</b> — minutes per week, last 4 weeks</li>
+      <li><b>🎯 Goal progress</b> — current best, predicted result, and estimated chance</li>
+      <li><b>😴 Recovery</b> — average sleep from check-ins</li>
+      <li><b>⏰ Practice reminders <span class="pill">new</span></b> — set a daily reminder time and tap <b>📅 Add to my calendar</b>. This writes a recurring daily event (with an alarm) to your phone's own Calendar, so it reminds you <b>even when the app is closed and even in airplane mode</b> — no accounts or push servers. A <b>🔔 In-app nudges</b> toggle adds a "keep your streak alive" prompt when you open the app with a streak at risk.</li>
+      <li><b>🔒 Privacy card</b> — confirms all data stays on the device</li>
+      <li><b>🛡️ Responsible AI note</b> — what the coach will and won't say to kids</li>
+    </ul>
+    <h3>Data controls</h3>
+    <ul>
+      <li><b>📤 Save backup file</b> — downloads a JSON backup of the current athlete</li>
+      <li><b>✉️ Email / share</b> — share that backup via the device share sheet</li>
+      <li><b>📥 Restore backup</b> — load a backup file; it's added as an athlete and the others are kept</li>
+      <li><b>👥 Switch / add athlete</b> — open the multi-athlete sheet (section 2)</li>
+      <li><b>📦 Backup all athletes <span class="pill">new</span></b> — save one file containing every athlete on the device</li>
+      <li><b>📋 Copy / paste backup <span class="pill">new</span></b> — move an athlete to another device with <b>no internet</b>: copy the backup text here, paste it into AthleteQuest on the other phone</li>
+      <li><b>🗑️ Delete this athlete</b> — remove just the current athlete (others are kept)</li>
+      <li><b>Sound on/off</b> toggle for game sound effects, and a <b>User Guide</b> link</li>
+    </ul>
+  </section>
+
+  <section class="card" id="game">
+    <h2>7. The Game Layer</h2>
+    <table>
+      <tr><th>Element</th><th>How it works</th></tr>
+      <tr><td><b>XP &amp; Levels</b></td><td>Earn XP for logging practices (+25), results (+20), PRs (+40), quests, and check-ins. Level-ups award bonus coins — and a shareable win card.</td></tr>
+      <tr><td><b>🪙 Coins</b></td><td>From quests, level-ups, and skill-ups. Spend in the Locker.</td></tr>
+      <tr><td><b>🔥 Streak</b></td><td>Open the app and be active on consecutive days. Don't let the flame die!</td></tr>
+      <tr><td><b>🏅 Badges</b></td><td>13 to collect — streaks, PRs, workout milestones, chat milestones, and more.</td></tr>
+      <tr><td><b>🌳 Skills</b></td><td>Each workout type grows a matching skill (e.g. speed work → ⚡ Speed). Every 100 points = 1 level + 15 coins.</td></tr>
+    </table>
+  </section>
+
+  <section class="card privacy" id="privacy" style="background:#fff;">
+    <h2>8. Data &amp; Privacy</h2>
+    <ul>
+      <li>All data — profiles, results, workouts, heart checks, and chats — lives in the browser's local storage on the device. Nothing is uploaded.</li>
+      <li>Each athlete is stored separately; deleting one leaves the others untouched.</li>
+      <li>Forms validate against impossible values (ages, future dates, extreme times, heart rates, sleep hours…), so typos can't corrupt the data.</li>
+      <li>Different devices have separate data — use backup/restore, "backup all," or copy/paste transfer to move athletes between devices.</li>
+      <li>Clearing browser data erases the app's data, so save a backup occasionally.</li>
+      <li>The only internet use: loading the app, fonts, and the one-time voice-model download. Everything else — including coach replies and reminders — runs on-device and works offline.</li>
+    </ul>
+  </section>
+
+  <section class="card" id="tips">
+    <h2>9. Tips &amp; Troubleshooting</h2>
+    <ul>
+      <li><b>Forecast says it needs more results</b> — log at least 3 results in the same event.</li>
+      <li><b>No benchmark band showing</b> — bands only appear for the supported timed events in section 3; otherwise set a custom target.</li>
+      <li><b>Reminder didn't fire</b> — make sure you tapped <b>📅 Add to my calendar</b> and allowed it; the reminder lives in your phone's Calendar app, not inside AthleteQuest.</li>
+      <li><b>Mic button shows 📡 error</b> — the one-time model download needs internet; try again online.</li>
+      <li><b>No sound/voice</b> — check the 🔊 toggle in the coach header, the sound toggle in the Parent dashboard, and the phone's mute switch.</li>
+      <li><b>Voice sounds female on Auto</b> — the device may have no male English voice; pick one manually or add one in text-to-speech settings.</li>
+      <li><b>Moving to a new phone</b> — Parents → Save backup file (or 📦 Backup all athletes, or 📋 Copy / paste backup) → send it to the new device → Restore / paste it.</li>
+      <li><b>App looks zoomed/cramped</b> — it's designed portrait-first for phones; on desktop it centers in a phone-width column.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><a class="backbtn" href="AthleteQuest.html" style="display:inline-flex;">← Back to the app</a></p>
+    <p>Have fun, train smart, and let Coach do the cheering! 🏆</p>
+  </footer>
+
+</div>
+</body>
+</html>

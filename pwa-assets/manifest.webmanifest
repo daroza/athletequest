@@ -1,0 +1,16 @@
+{
+  "name": "AthleteQuest AI",
+  "short_name": "AthleteQuest",
+  "description": "Your personal AI sports coach — train smart, track progress, and level up.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1f1147",
+  "theme_color": "#6366F1",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
