@@ -2516,6 +2516,7 @@ function coachReply(msgRaw){
   const m=msgRaw.toLowerCase();
   const twin=computeTwin();
   const has=(...words)=>words.some(w=>m.includes(w));
+  const hasWord=(...res)=>res.some(re=>re.test(m)); // word-boundary match to avoid substring collisions (eat/won/rest/goal/hi…)
   let body;
 
   // --- safety guardrails first ---
@@ -2547,7 +2548,7 @@ function coachReply(msgRaw){
     }
     body=plan+'\n\n'+nudge();
   }
-  else if(has('goal','qualify','close am i','make it','varsity')){
+  else if(has('qualify','close am i','make it','varsity')||hasWord(/\bgoals?\b/)){
     const gf=goalForecast();
     if(gf && gf.f && gf.f.ok){
       body='Goal check! 🎯 "'+gf.goal.text+'"\n\n• Best now: '+fmtVal(gf.best,gf.goal.unit)+'\n• Target: '+fmtVal(gf.goal.target,gf.goal.unit)+'\n• My forecast for '+shortDate(gf.when)+': '+fmtVal(gf.pred,gf.goal.unit)+'\n• Chance if you keep this up: '+gf.prob+'%\n\n'+(gf.beats?'The math says you\'re ON TRACK. Keep showing up and it\'s yours! 🏆':'You\'re closing the gap — every practice nudges that number up. Consistency is your rocket fuel! 🚀');
@@ -2564,17 +2565,17 @@ function coachReply(msgRaw){
     if(twin.recentFeel && twin.recentFeel<3) reasons.push('you\'ve been feeling tired in practice');
     body='Hey, every single champion has slow patches — even Olympians! 🐢➡️🐇 It\'s usually temporary.\n\n'+(reasons.length?'Your Athlete Twin noticed: '+reasons.join(', and ')+'.':'Your data actually looks solid — sometimes your body is just busy growing stronger!')+'\n\nThis week\'s reset plan: 1 great technique session ('+sportDrill('technique')+'), 1 fun easy day, plenty of sleep. Then watch the trend flip. 📈';
   }
-  else if(has('eat','food','nutrition','snack','breakfast','hungry')){
+  else if((has('pulse','bpm','heartbeat')||hasWord(/\bhearts?\b/))&&!has('racing','freaking','panic')){
+    body='Your heart is your engine! 💓 Check it before practice (nice and rested) and again right after (working hard) — the difference shows how hard you trained.\n\nHow: put two fingers (not your thumb) on your wrist or the side of your neck, count the thumps for 15 seconds, then multiply by 4. That\'s your BPM!\n\nTap the 💓 Heart Check button on Home and I\'ll time you and save it. As you get fitter, your before-practice number slowly drops — proof your engine is getting stronger! 🚂';
+  }
+  else if(has('food','nutrition','snack','breakfast','hungry')||hasWord(/\beat/)){
     body='Fuel talk! 🍽️ Easy athlete plate: half veggies & fruit, a fist of protein (chicken, eggs, beans), a fist of carbs (rice, pasta, bread) — carbs are energy, not the enemy!\n\n⏰ Before practice: light snack like a banana. After: snack with protein + carbs (chocolate milk is famously great!).\n\nAnd remember — I give fun ideas, but parents and doctors make the real food rules. 💙';
   }
   else if(has('motivat','don\'t want','dont want','lazy','bored','quit','tired of')){
     const b=BADGES.find(x=>!state.game.badges.includes(x.id));
     body='I hear you — every athlete has "blah" days. Even pros! 🛋️\n\nTry the 10-minute trick: just start for 10 minutes. If it still stinks, stop — no guilt. (Spoiler: you usually keep going!)\n\n'+(state.game.streak>1?'Also, you\'re on a '+state.game.streak+'-day streak — don\'t let that flame die! 🔥':'Start a streak today — day 1 is the hardest and you can do hard things. 🔥')+(b?'\nPlus the '+b.e+' "'+b.n+'" badge is SO close…':'');
   }
-  else if(has('heart','pulse','bpm','heartbeat')){
-    body='Your heart is your engine! 💓 Check it before practice (nice and rested) and again right after (working hard) — the difference shows how hard you trained.\n\nHow: put two fingers (not your thumb) on your wrist or the side of your neck, count the thumps for 15 seconds, then multiply by 4. That\'s your BPM!\n\nTap the 💓 Heart Check button on Home and I\'ll time you and save it. As you get fitter, your before-practice number slowly drops — proof your engine is getting stronger! 🚂';
-  }
-  else if(has('sleep','recover','rest','tired')){
+  else if(has('sleep','recover','tired')||hasWord(/\brest/)){
     body='Recovery is where the magic happens! 🌙 While you sleep, your body literally rebuilds stronger. Aim for 9-10 hours at your age — kids who sleep under 8 get hurt more often.\n\nQuick recovery combo: water 💧 + stretch 🧘 + good food 🍎 + screens off a bit before bed 📵.\n\nFor your sport: '+sportDrill('recovery')+'\n\nLog your sleep on the Home screen and I\'ll track your recovery trend!';
   }
   else if(has('gear','equipment','cleats','racquet','racket','spikes','what do i need','should i buy')){
@@ -2609,7 +2610,7 @@ function coachReply(msgRaw){
       'I\'m proud of you for showing up and trying — that\'s what actually builds a champion. 🏅 One game doesn\'t define you. Feel it, then flip it: pick one small thing to sharpen, get good sleep tonight, and let\'s go again. The comeback is always better than the setback. 🚀'
     ]);
   }
-  else if(has('won','i win','we won','first place','pr ','personal best','crushed it','nailed it','best time','medal','came first','new record')){
+  else if(has('i win','we won','first place','pr ','personal best','crushed it','nailed it','best time','medal','came first','new record')||hasWord(/\bwon(?![a-z'’])/)){
     body=pick([
       'YESSS!! 🎉🏆 That\'s what showing up every day gets you! Take a second to actually SOAK THIS IN — you earned it. Then log it so your Athlete Twin updates your forecast. What felt good out there? Let\'s do more of THAT. So proud of you! 🌟',
       'HUGE! 🥳 A win like that isn\'t luck — it\'s all those practices adding up. Celebrate it, tell someone who\'ll be proud, and log the result for that sweet XP. 📈 Then remember the feeling — that\'s your fuel for the next one. Champion behavior! 🏅',
@@ -2661,7 +2662,7 @@ function coachReply(msgRaw){
       'You\'re very welcome! 💙 Cheering you on is my favorite job. Keep being the kind of athlete who shows up — that\'s what makes you special. 🌟'
     ]);
   }
-  else if(has('hi','hello','hey','sup','yo','what\'s up','whats up','good morning')){
+  else if(has('hello','what\'s up','whats up','good morning')||hasWord(/\bhi\b/,/\bhey\b/,/\byo\b/,/\bsup\b/)){
     body=pick([
       'Great to see you! Here\'s your snapshot: Level '+state.game.level+', '+state.game.streak+'-day streak 🔥, consistency '+twin.consistency+'/100.\n\nWant to know what to do today? Just ask! 😄',
       'Hey, superstar! 🌟 You\'re Level '+state.game.level+' with a '+state.game.streak+'-day streak going. What\'s on your mind — training, a goal, or how you\'re feeling? I\'m all ears. 👂',
